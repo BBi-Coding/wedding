@@ -843,7 +843,7 @@
                 <p class="bank-note">{{ t('bankNote') }}</p>
               </div>
             </div>
-            <a class="cta" href="#top">{{ t('ctaText') }}</a>
+            <a class="cta" href="#top" @click.prevent="scrollToTop">{{ t('ctaText') }}</a>
           </article>
 
         </section>
@@ -1009,6 +1009,9 @@
             var lang = this.translations[this.currentLang];
             if (lang && lang[key] !== undefined) return lang[key];
             return this.translations.pl[key] || key;
+          },
+          scrollToTop() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
           },
           toggleFlip() {
             if (this.flipLocked) return;
