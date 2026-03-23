@@ -31,6 +31,10 @@
         margin: 0;
       }
 
+      [v-cloak] {
+        display: none;
+      }
+
       html {
         scroll-behavior: smooth;
       }
@@ -407,7 +411,7 @@
         padding: 2rem 0 3rem;
         display: grid;
         gap: 1.2rem;
-        max-width: 680px;
+        max-width: 720px;
         margin: 0 auto;
       }
 
@@ -687,7 +691,7 @@
     </style>
   </head>
   <body>
-    <div id="app" class="app-shell grain">
+    <div id="app" class="app-shell grain" v-cloak>
       <span id="top"></span>
 
       <!-- Language switcher -->
@@ -812,7 +816,14 @@
                     height="100"
                   />
                 </p>
-                <p class="support-value">@BrajanBiegalski</p>
+                <p class="support-value">
+                  <a
+                    href="https://paypal.me/BrajanBiegalski"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Otworz PayPal BrajanBiegalski"
+                  >@BrajanBiegalski</a>
+                </p>
                 <img
                   class="support-qr"
                   src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fpaypal.me%2FBrajanBiegalski"
@@ -868,37 +879,37 @@
                 introNames: "Abigail & Brajan",
                 eyebrow: "Nothing Fancy",
                 tagline: "Just Love",
-                flipHint: "Kliknij mnie",
-                flipAriaFront: "Kliknij, aby zobaczyc szczegoly wesela",
-                flipAriaBack: "Kliknij, aby zobaczyc przod zaproszenia",
+                flipHint: "Kliknij, aby odwrócić",
+                flipAriaFront: "Kliknij, aby zobaczyć szczegóły wesela",
+                flipAriaBack: "Kliknij, aby zobaczyć przód zaproszenia",
                 guestGreeting: "Witamy,",
-                backEyebrow: "Szczegoly",
+                backEyebrow: "Szczegóły",
                 backTitle: "Nasze Wesele",
                 backSubtitle: "Wszystkie informacje",
                 backLabelDate: "Data",
                 backLabelPlace: "Miejsce",
-                backLabelGuest: "JESTESCIE ZAPROSZENI:",
-                backFlipHint: "Kliknij, aby wrocic",
-                sectionTitle: "Dla Gosci",
-                sectionBody: "Z wielka radoscia zapraszamy Was do wspolnego swietowania naszego slubu. Ten wyjatkowy dzien chcemy spedzic w gronie najblizszych nam osob. Wiecej szczegolow juz wkrotce!",
-                supportNote: "Jezeli jestescie chetni pomoc nam troche w finansowym sensie, bedziemy bardzo wdzieczni.",
+                backLabelGuest: "JESTEŚCIE ZAPROSZENI:",
+                backFlipHint: "Kliknij, aby wrócić",
+                sectionTitle: "Dla Gości",
+                sectionBody: "Z wielką radością zapraszamy Was do wspólnego świętowania naszego ślubu. Ten wyjątkowy dzień chcemy spędzić w gronie najbliższych nam osób. Więcej szczegółów już wkrótce!",
+                supportNote: "Jeżeli chcielibyście wesprzeć nas finansowo, będziemy bardzo wdzięczni.",
                 supportBank: "Przelew bankowy",
-                bankNote: "\ud83c\udde9\ud83c\uddea Ta opcja dziala tylko dla kont niemieckich.",
+                bankNote: "\ud83c\udde9\ud83c\uddea Ta opcja działa tylko dla kont niemieckich.",
                 ctaText: "\u2191 Zobacz zaproszenie",
-                footerThanks: "Z gory dziekuje za wasza przyjazn!"
+                footerThanks: "Dziękujemy, że jesteście z nami!"
               },
               en: {
                 introLine: "Nothing Fancy \u00b7 Just Love",
                 introNames: "Abigail & Brajan",
                 eyebrow: "Nothing Fancy",
                 tagline: "Just Love",
-                flipHint: "Click me",
+                flipHint: "Click to flip",
                 flipAriaFront: "Click to see wedding details",
                 flipAriaBack: "Click to see the front of the invitation",
                 guestGreeting: "Welcome,",
                 backEyebrow: "Details",
                 backTitle: "Our Wedding",
-                backSubtitle: "All the information",
+                backSubtitle: "All details in one place",
                 backLabelDate: "Date",
                 backLabelPlace: "Venue",
                 backLabelGuest: "YOU ARE INVITED:",
@@ -909,14 +920,14 @@
                 supportBank: "Bank transfer",
                 bankNote: "\ud83c\udde9\ud83c\uddea This option is available for German bank accounts only.",
                 ctaText: "\u2191 See invitation",
-                footerThanks: "Thank you for being part of our journey!"
+                footerThanks: "Thank you for celebrating this day with us!"
               },
               de: {
                 introLine: "Nothing Fancy \u00b7 Just Love",
                 introNames: "Abigail & Brajan",
                 eyebrow: "Nothing Fancy",
                 tagline: "Just Love",
-                flipHint: "Klick mich",
+                flipHint: "Zum Umdrehen klicken",
                 flipAriaFront: "Klicken, um Hochzeitsdetails zu sehen",
                 flipAriaBack: "Klicken, um die Vorderseite der Einladung zu sehen",
                 guestGreeting: "Willkommen,",
@@ -926,12 +937,12 @@
                 backLabelDate: "Datum",
                 backLabelPlace: "Ort",
                 backLabelGuest: "IHR SEID EINGELADEN:",
-                backFlipHint: "Klicken, um umzudrehen",
-                sectionTitle: "Fuer unsere Gaeste",
-                sectionBody: "Mit grosser Freude laden wir euch ein, unseren Hochzeitstag gemeinsam mit uns zu feiern. Wir moechten diesen besonderen Tag im Kreise unserer Liebsten verbringen. Weitere Details folgen bald!",
-                supportNote: "Wenn ihr uns finanziell ein wenig unterstuetzen moechtet, waeren wir sehr dankbar.",
-                supportBank: "Bankueberweisung",
-                bankNote: "\ud83c\udde9\ud83c\uddea Diese Option gilt nur fuer deutsche Bankkonten.",
+                backFlipHint: "Klicken, um zurückzukehren",
+                sectionTitle: "Für unsere Gäste",
+                sectionBody: "Mit großer Freude laden wir euch ein, unseren Hochzeitstag gemeinsam mit uns zu feiern. Wir möchten diesen besonderen Tag im Kreise unserer Liebsten verbringen. Weitere Details folgen bald!",
+                supportNote: "Wenn ihr uns finanziell ein wenig unterstützen möchtet, wären wir sehr dankbar.",
+                supportBank: "Banküberweisung",
+                bankNote: "\ud83c\udde9\ud83c\uddea Diese Option gilt nur für deutsche Bankkonten.",
                 ctaText: "\u2191 Zur Einladung",
                 footerThanks: "Vielen Dank, dass ihr Teil unseres Weges seid!"
               }
