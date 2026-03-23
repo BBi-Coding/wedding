@@ -441,6 +441,76 @@
         font-size: 0.97rem;
       }
 
+      .support-note {
+        margin-top: 1rem;
+        line-height: 1.72;
+        color: #50473f;
+        font-size: 0.95rem;
+      }
+
+      .support-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 0.85rem;
+        margin-top: 1rem;
+      }
+
+      .support-card {
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(178, 141, 106, 0.2);
+        border-radius: 14px;
+        padding: 0.85rem;
+        text-align: center;
+        display: grid;
+        justify-items: center;
+      }
+
+      .support-title {
+        margin-bottom: 0.25rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .support-title-row {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+      }
+
+      .support-logo {
+        width: 100px;
+        height: 50px;
+        object-fit: contain;
+        display: inline-block;
+      }
+
+      .support-value {
+        font-size: 0.95rem;
+        color: #3f352c;
+        word-break: break-word;
+        text-align: center;
+      }
+
+      .bank-note {
+        margin-top: 0.5rem;
+        font-size: 0.86rem;
+        color: #6a5e52;
+        line-height: 1.55;
+        text-align: center;
+      }
+
+      .support-qr {
+        width: 120px;
+        height: 120px;
+        margin-top: 0.6rem;
+        border-radius: 10px;
+        border: 1px solid rgba(178, 141, 106, 0.22);
+        background: #fff;
+      }
+
       .cta {
         display: inline-flex;
         align-items: center;
@@ -487,6 +557,50 @@
         text-transform: uppercase;
         margin-bottom: 0.4rem;
         color: var(--accent);
+      }
+
+      /* ── Language switcher ── */
+      .lang-bar {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 40;
+        display: flex;
+        gap: 0.35rem;
+        background: rgba(255, 255, 255, 0.72);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(178, 141, 106, 0.22);
+        border-radius: var(--radius-pill);
+        padding: 0.25rem;
+      }
+
+      .lang-btn {
+        border: none;
+        background: transparent;
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        padding: 0.3rem 0.6rem;
+        border-radius: var(--radius-pill);
+        cursor: pointer;
+        transition: background 0.25s ease, color 0.25s ease;
+      }
+
+      .lang-btn:hover {
+        background: rgba(178, 141, 106, 0.12);
+        color: var(--text);
+      }
+
+      .lang-btn.active {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .lang-btn:focus-visible {
+        outline: 2px solid var(--accent-strong);
+        outline-offset: 2px;
       }
 
       /* ── Scroll reveal ── */
@@ -574,6 +688,29 @@
   </head>
   <body>
     <div id="app" class="app-shell grain">
+      <span id="top"></span>
+
+      <!-- Language switcher -->
+      <nav class="lang-bar" aria-label="Language">
+        <button
+          class="lang-btn"
+          :class="{ active: currentLang === 'pl' }"
+          @click="currentLang = 'pl'"
+          type="button"
+        >PL</button>
+        <button
+          class="lang-btn"
+          :class="{ active: currentLang === 'en' }"
+          @click="currentLang = 'en'"
+          type="button"
+        >EN</button>
+        <button
+          class="lang-btn"
+          :class="{ active: currentLang === 'de' }"
+          @click="currentLang = 'de'"
+          type="button"
+        >DE</button>
+      </nav>
 
       <!-- Intro overlay -->
       <div
@@ -583,8 +720,8 @@
         aria-live="polite"
       >
         <div class="intro-panel">
-          <span class="intro-line">Nothing Fancy &middot; Just Love</span>
-          <span class="intro-names">Abigail &amp; Brajan</span>
+          <span class="intro-line">{{ t('introLine') }}</span>
+          <span class="intro-names">{{ t('introNames') }}</span>
           <span class="intro-date">05.06.2026</span>
           <span class="intro-divider"></span>
         </div>
@@ -597,7 +734,7 @@
             class="hero-flip reveal"
             role="button"
             tabindex="0"
-            :aria-label="isFlipped ? 'Kliknij, aby zobaczyc przod zaproszenia' : 'Kliknij, aby zobaczyc szczegoly wesela'"
+            :aria-label="isFlipped ? t('flipAriaBack') : t('flipAriaFront')"
             @click="toggleFlip"
             @keydown.enter.prevent="toggleFlip"
             @keydown.space.prevent="toggleFlip"
@@ -616,40 +753,40 @@
                     height="200"
                   />
                 </div>
-                <p class="eyebrow">Nothing Fancy</p>
-                <p class="tagline">Just Love</p>
+                <p class="eyebrow">{{ t('eyebrow') }}</p>
+                <p class="tagline">{{ t('tagline') }}</p>
                 <h1 id="couple-heading">{{ coupleNames }}</h1>
                 <p class="date-display">{{ weddingDate }}</p>
                 <p v-if="guestName" class="guest-chip">
-                  Witamy, {{ guestName }}!
+                  {{ t('guestGreeting') }} {{ guestName }}!
                 </p>
                 <span class="flip-hint">
                   <span class="flip-hint-icon" aria-hidden="true"></span>
-                  Kliknij mnie
+                  {{ t('flipHint') }}
                 </span>
               </article>
 
               <!-- Back -->
               <article class="hero-card hero-card-back">
-                <p class="back-eyebrow">Szczegoly</p>
-                <h2 class="back-title">Nasze Wesele</h2>
-                <p class="back-subtitle">Wszystkie informacje</p>
+                <p class="back-eyebrow">{{ t('backEyebrow') }}</p>
+                <h2 class="back-title">{{ t('backTitle') }}</h2>
+                <p class="back-subtitle">{{ t('backSubtitle') }}</p>
                 <span class="back-divider" aria-hidden="true"></span>
                 <div class="back-info-grid">
                   <div class="back-info-item">
-                    <p class="back-label">Data</p>
+                    <p class="back-label">{{ t('backLabelDate') }}</p>
                     <p class="back-value">{{ weddingDate }}</p>
                   </div>
                   <div class="back-info-item">
-                    <p class="back-label">Miejsce</p>
+                    <p class="back-label">{{ t('backLabelPlace') }}</p>
                     <p class="back-value">{{ weddingLocation }}</p>
                   </div>
                   <div class="back-info-item">
-                    <p class="back-label">JESTESCIE ZAPROSZENI:</p>
+                    <p class="back-label">{{ t('backLabelGuest') }}</p>
                     <p class="back-value">{{ invitedGuestName }}</p>
                   </div>
                 </div>
-                <span class="back-flip-hint">Kliknij, aby wrocic</span>
+                <span class="back-flip-hint">{{ t('backFlipHint') }}</span>
               </article>
 
             </div>
@@ -660,32 +797,47 @@
         <section class="content" aria-label="Informacje">
 
           <article class="info-box reveal">
-            <h2 class="info-title">Zaproszenie</h2>
-            <p class="info-body">
-              Z wielka radoscia zapraszamy Was do wspolnego swietowania
-              naszego slubu. Ten wyjatkowy dzien chcemy spedzic w gronie
-              najblizszych nam osob. Wiecej szczegolow juz wkrotce!
-            </p>
-          </article>
-
-          <article class="info-box reveal">
-            <h2 class="info-title">Dla Gosci</h2>
-            <p class="info-body">
-              Kazda zaproszona osoba otrzyma swoj unikalny, dedykowany link
-              z&nbsp;imieniem &mdash; np.&nbsp;<strong>?guest=Anna</strong>.
-              Dzieki temu zaproszenie bedzie spersonalizowane specjalnie
-              dla&nbsp;Ciebie.
-            </p>
-            <a class="cta" href="#couple-heading">
-              &uarr; Zobacz zaproszenie
-            </a>
+            <h2 class="info-title">{{ t('sectionTitle') }}</h2>
+            <p class="info-body">{{ t('sectionBody') }}</p>
+            <p class="support-note">{{ t('supportNote') }}</p>
+            <div class="support-grid" aria-label="Opcje wsparcia">
+              <div class="support-card">
+                <p class="support-title support-title-row">
+                  <img
+                    class="support-logo"
+                    src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg"
+                    alt="Logo PayPal"
+                    loading="lazy"
+                    width="100"
+                    height="100"
+                  />
+                </p>
+                <p class="support-value">@BrajanBiegalski</p>
+                <img
+                  class="support-qr"
+                  src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fpaypal.me%2FBrajanBiegalski"
+                  alt="Kod QR do PayPal BrajanBiegalski"
+                  loading="lazy"
+                  width="120"
+                  height="120"
+                />
+              </div>
+              <div class="support-card">
+                <p class="support-title">{{ t('supportBank') }}</p>
+                <p class="support-value">DE17 1001 2345 7219 3281 11</p>
+                <p class="support-value">Name: Brajan Biegalski</p>
+                <p class="support-value">BIC: TRBKDEBBXXX</p>
+                <p class="bank-note">{{ t('bankNote') }}</p>
+              </div>
+            </div>
+            <a class="cta" href="#top">{{ t('ctaText') }}</a>
           </article>
 
         </section>
 
         <footer class="reveal">
           <span class="footer-date">05.06.2026</span>
-          Dziekujemy, ze jestescie z nami.
+          {{ t('footerThanks') }}
         </footer>
       </main>
     </div>
@@ -704,8 +856,83 @@
             introHidden: false,
             isFlipped: false,
             flipLocked: false,
+            currentLang: "pl",
             guestAliases: {
               Galaskiewicz: "GALASKIEWICZE"
+            },
+            translations: {
+              pl: {
+                introLine: "Nothing Fancy \u00b7 Just Love",
+                introNames: "Abigail & Brajan",
+                eyebrow: "Nothing Fancy",
+                tagline: "Just Love",
+                flipHint: "Kliknij mnie",
+                flipAriaFront: "Kliknij, aby zobaczyc szczegoly wesela",
+                flipAriaBack: "Kliknij, aby zobaczyc przod zaproszenia",
+                guestGreeting: "Witamy,",
+                backEyebrow: "Szczegoly",
+                backTitle: "Nasze Wesele",
+                backSubtitle: "Wszystkie informacje",
+                backLabelDate: "Data",
+                backLabelPlace: "Miejsce",
+                backLabelGuest: "JESTESCIE ZAPROSZENI:",
+                backFlipHint: "Kliknij, aby wrocic",
+                sectionTitle: "Dla Gosci",
+                sectionBody: "Z wielka radoscia zapraszamy Was do wspolnego swietowania naszego slubu. Ten wyjatkowy dzien chcemy spedzic w gronie najblizszych nam osob. Wiecej szczegolow juz wkrotce!",
+                supportNote: "Jezeli jestescie chetni pomoc nam troche w finansowym sensie, bedziemy bardzo wdzieczni.",
+                supportBank: "Przelew bankowy",
+                bankNote: "\ud83c\udde9\ud83c\uddea Ta opcja dziala tylko dla kont niemieckich.",
+                ctaText: "\u2191 Zobacz zaproszenie",
+                footerThanks: "Z gory dziekuje za wasza przyjazn!"
+              },
+              en: {
+                introLine: "Nothing Fancy \u00b7 Just Love",
+                introNames: "Abigail & Brajan",
+                eyebrow: "Nothing Fancy",
+                tagline: "Just Love",
+                flipHint: "Click me",
+                flipAriaFront: "Click to see wedding details",
+                flipAriaBack: "Click to see the front of the invitation",
+                guestGreeting: "Welcome,",
+                backEyebrow: "Details",
+                backTitle: "Our Wedding",
+                backSubtitle: "All the information",
+                backLabelDate: "Date",
+                backLabelPlace: "Venue",
+                backLabelGuest: "YOU ARE INVITED:",
+                backFlipHint: "Click to go back",
+                sectionTitle: "For Our Guests",
+                sectionBody: "With great joy we invite you to celebrate our wedding day with us. We want to spend this special day surrounded by those closest to our hearts. More details coming soon!",
+                supportNote: "If you would like to support us financially, we would be very grateful.",
+                supportBank: "Bank transfer",
+                bankNote: "\ud83c\udde9\ud83c\uddea This option is available for German bank accounts only.",
+                ctaText: "\u2191 See invitation",
+                footerThanks: "Thank you for being part of our journey!"
+              },
+              de: {
+                introLine: "Nothing Fancy \u00b7 Just Love",
+                introNames: "Abigail & Brajan",
+                eyebrow: "Nothing Fancy",
+                tagline: "Just Love",
+                flipHint: "Klick mich",
+                flipAriaFront: "Klicken, um Hochzeitsdetails zu sehen",
+                flipAriaBack: "Klicken, um die Vorderseite der Einladung zu sehen",
+                guestGreeting: "Willkommen,",
+                backEyebrow: "Details",
+                backTitle: "Unsere Hochzeit",
+                backSubtitle: "Alle Informationen",
+                backLabelDate: "Datum",
+                backLabelPlace: "Ort",
+                backLabelGuest: "IHR SEID EINGELADEN:",
+                backFlipHint: "Klicken, um umzudrehen",
+                sectionTitle: "Fuer unsere Gaeste",
+                sectionBody: "Mit grosser Freude laden wir euch ein, unseren Hochzeitstag gemeinsam mit uns zu feiern. Wir moechten diesen besonderen Tag im Kreise unserer Liebsten verbringen. Weitere Details folgen bald!",
+                supportNote: "Wenn ihr uns finanziell ein wenig unterstuetzen moechtet, waeren wir sehr dankbar.",
+                supportBank: "Bankueberweisung",
+                bankNote: "\ud83c\udde9\ud83c\uddea Diese Option gilt nur fuer deutsche Bankkonten.",
+                ctaText: "\u2191 Zur Einladung",
+                footerThanks: "Vielen Dank, dass ihr Teil unseres Weges seid!"
+              }
             }
           };
         },
@@ -717,6 +944,11 @@
         },
 
         methods: {
+          t(key) {
+            var lang = this.translations[this.currentLang];
+            if (lang && lang[key] !== undefined) return lang[key];
+            return this.translations.pl[key] || key;
+          },
           toggleFlip() {
             if (this.flipLocked) return;
             this.flipLocked = true;
@@ -740,10 +972,23 @@
           }
         },
 
+        watch: {
+          currentLang(val) {
+            document.documentElement.lang = val === "en" ? "en" : val === "de" ? "de" : "pl";
+          }
+        },
+
         mounted() {
           var params = new URLSearchParams(window.location.search);
+          var langParam = params.get("lang");
+          if (langParam && this.translations[langParam.toLowerCase()]) {
+            this.currentLang = langParam.toLowerCase();
+          }
           var raw = params.get("guest");
-          var hashAlias = window.location.hash.replace(/^#/, "").trim();
+          var hashAlias = decodeURIComponent(window.location.hash)
+            .replace(/^#/, "")
+            .replace(/^\/+|\/+$/g, "")
+            .trim();
 
           if (raw) {
             var safeQuery = raw.trim().replace(/[<>"'&]/g, "").slice(0, 60);
