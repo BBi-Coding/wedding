@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abigail &amp; Brajan &ndash; Zaproszenie Slubne</title>
+    <meta name="description" content="Zaproszenie na slub Abigail i Brajana, 05.06.2026" />
+    <style>
+      :root {
+        --bg: #f7f4ef;
+        --bg-soft: #efe9df;
+        --text: #2f2b26;
+        --muted: #756d63;
+        --accent: #c4a78b;
+        --accent-strong: #b28d6a;
+        --gold: #d4b896;
+        --card: rgba(255, 255, 255, 0.62);
+        --card-solid: rgba(255, 255, 255, 0.92);
+        --ring: rgba(178, 141, 106, 0.3);
+        --shadow: 0 20px 50px rgba(76, 52, 33, 0.12);
+        --shadow-hover: 0 30px 65px rgba(76, 52, 33, 0.18);
+        --radius-card: 28px;
+        --radius-pill: 999px;
+        --transition-flip: 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(ellipse at 12% 8%, #fff7ec 0%, transparent 35%),
+          radial-gradient(ellipse at 88% 22%, #f3ede2 0%, transparent 42%),
+          radial-gradient(ellipse at 50% 80%, #faf5ed 0%, transparent 50%),
+          linear-gradient(160deg, var(--bg) 0%, var(--bg-soft) 100%);
+        overflow-x: hidden;
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .app-shell {
+        position: relative;
+        min-height: 100vh;
+        isolation: isolate;
+      }
+
+      /* Subtle grain overlay */
+      .grain::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.07;
+        background-image: radial-gradient(#000 0.5px, transparent 0.5px);
+        background-size: 3px 3px;
+        z-index: 0;
+      }
+
+      /* ── Intro overlay ── */
+      .intro {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #efe6d9 0%, #f8f3ec 50%, #faf6f0 100%);
+        transition: opacity 0.7s ease, visibility 0.7s ease;
+      }
+
+      .intro.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .intro-panel {
+        text-align: center;
+        padding: 2.5rem;
+        animation: introPulse 1.5s ease-out both;
+      }
+
+      .intro-line {
+        display: block;
+        font-size: clamp(0.72rem, 1.6vw, 0.88rem);
+        text-transform: uppercase;
+        letter-spacing: 0.42em;
+        color: var(--muted);
+        margin-bottom: 0.3rem;
+      }
+
+      .intro-names {
+        display: block;
+        margin-top: 1rem;
+        font-size: clamp(2rem, 6vw, 4rem);
+        font-weight: 400;
+        letter-spacing: 0.06em;
+        color: var(--text);
+        line-height: 1.15;
+      }
+
+      .intro-date {
+        display: block;
+        margin-top: 0.8rem;
+        font-size: clamp(0.9rem, 2vw, 1.15rem);
+        letter-spacing: 0.3em;
+        color: var(--accent-strong);
+      }
+
+      .intro-divider {
+        display: block;
+        width: 48px;
+        height: 1px;
+        background: var(--accent);
+        margin: 1rem auto 0;
+        opacity: 0.6;
+      }
+
+      @keyframes introPulse {
+        0% {
+          opacity: 0;
+          transform: translateY(20px) scale(0.97);
+        }
+        60% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* ── Main layout ── */
+      main {
+        width: min(100%, 1080px);
+        margin: 0 auto;
+        padding: 1.25rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* ── Hero section ── */
+      .hero {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 2rem 0;
+      }
+
+      .hero-flip {
+        width: min(100%, 720px);
+        perspective: 1400px;
+        cursor: pointer;
+      }
+
+      .flip-card {
+        position: relative;
+        width: 100%;
+        min-height: 600px;
+        transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
+        will-change: transform;
+      }
+
+      .hero-card {
+        position: absolute;
+        inset: 0;
+        background: var(--card);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: var(--radius-card);
+        box-shadow: var(--shadow);
+        padding: clamp(1.8rem, 4.5vw, 3.2rem) clamp(1.5rem, 4vw, 2.8rem);
+        text-align: center;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        gap: 0.2rem;
+        transition:
+          transform var(--transition-flip),
+          opacity var(--transition-flip),
+          box-shadow 0.45s ease;
+        overflow: hidden;
+      }
+
+      .hero-card:hover {
+        box-shadow: var(--shadow-hover);
+      }
+
+      /* Front face */
+      .hero-card-front {
+        transform: rotateY(0deg);
+        opacity: 1;
+        z-index: 2;
+        pointer-events: auto;
+      }
+
+      .flip-card.is-flipped .hero-card-front {
+        transform: rotateY(-180deg);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Back face */
+      .hero-card-back {
+        transform: rotateY(180deg);
+        opacity: 0;
+        z-index: 1;
+        pointer-events: none;
+        background: #ffffff;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: 1px solid rgba(214, 200, 183, 0.75);
+      }
+
+      .flip-card.is-flipped .hero-card-back {
+        transform: rotateY(0deg);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* ── Photo frame ── */
+      .photo-frame {
+        width: clamp(180px, 28vw, 240px);
+        aspect-ratio: 1;
+        border-radius: var(--radius-pill);
+        padding: 5px;
+        background: linear-gradient(145deg, #f7ecdf, #cda985);
+        box-shadow:
+          0 8px 24px rgba(76, 52, 33, 0.16),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+        margin-bottom: 0.6rem;
+      }
+
+      .hero-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: var(--radius-pill);
+        border: 3px solid rgba(255, 255, 255, 0.92);
+        display: block;
+      }
+
+      /* ── Typography ── */
+      .eyebrow {
+        color: var(--muted);
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        font-size: clamp(0.66rem, 1.4vw, 0.76rem);
+        font-weight: 400;
+      }
+
+      .tagline {
+        font-size: clamp(1rem, 2.4vw, 1.3rem);
+        color: var(--muted);
+        font-style: italic;
+        font-weight: 300;
+        margin-top: 0.15rem;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 7vw, 4.2rem);
+        font-weight: 400;
+        line-height: 1.1;
+        letter-spacing: 0.02em;
+        margin-top: 0.5rem;
+      }
+
+      .date-display {
+        font-size: clamp(1rem, 2.2vw, 1.3rem);
+        letter-spacing: 0.22em;
+        color: var(--accent-strong);
+        margin-top: 0.6rem;
+      }
+
+      .guest-chip {
+        margin-top: 0.9rem;
+        width: fit-content;
+        border: 1px solid var(--ring);
+        border-radius: var(--radius-pill);
+        padding: 0.45rem 1.1rem;
+        font-size: 0.92rem;
+        color: #5f5347;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+      }
+
+      .flip-hint {
+        margin-top: 1.2rem;
+        font-size: 0.76rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--accent);
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+      }
+
+      .hero-flip:hover .flip-hint {
+        opacity: 1;
+      }
+
+      .flip-hint-icon {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 1.5px solid var(--accent);
+        border-radius: 4px;
+        position: relative;
+        transition: transform 0.4s ease;
+      }
+
+      .hero-flip:hover .flip-hint-icon {
+        transform: rotateY(180deg);
+      }
+
+      /* ── Back card content ── */
+      .back-eyebrow {
+        color: var(--muted);
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        font-size: clamp(0.66rem, 1.4vw, 0.76rem);
+        font-weight: 400;
+      }
+
+      .back-title {
+        font-size: clamp(1.6rem, 5vw, 2.8rem);
+        font-weight: 400;
+        margin-top: 0.5rem;
+        letter-spacing: 0.02em;
+      }
+
+      .back-subtitle {
+        font-size: 0.88rem;
+        color: var(--muted);
+        margin-top: 0.3rem;
+        font-style: italic;
+      }
+
+      .back-divider {
+        width: 48px;
+        height: 1px;
+        background: var(--accent);
+        opacity: 0.5;
+        margin: 1rem 0;
+      }
+
+      .back-info-grid {
+        width: min(100%, 440px);
+        display: grid;
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+      }
+
+      .back-info-item {
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(178, 141, 106, 0.18);
+        border-radius: 16px;
+        padding: 0.9rem 1rem;
+        transition: background 0.3s ease;
+      }
+
+      .back-info-item:hover {
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .back-label {
+        font-size: 0.7rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .back-value {
+        font-size: 1.02rem;
+        color: #43392f;
+        margin-top: 0.3rem;
+      }
+
+      .back-flip-hint {
+        margin-top: 1.4rem;
+        font-size: 0.76rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--accent);
+        opacity: 0.7;
+      }
+
+      /* ── Content cards ── */
+      .content {
+        padding: 2rem 0 3rem;
+        display: grid;
+        gap: 1.2rem;
+        max-width: 680px;
+        margin: 0 auto;
+      }
+
+      .info-box {
+        background: var(--card-solid);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 20px;
+        box-shadow: 0 8px 26px rgba(79, 57, 39, 0.07);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        padding: clamp(1.3rem, 3vw, 1.8rem);
+        transition: transform 0.45s ease, box-shadow 0.45s ease;
+      }
+
+      .info-box:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 40px rgba(79, 57, 39, 0.13);
+      }
+
+      .info-title {
+        font-size: 0.78rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.7rem;
+      }
+
+      .info-body {
+        line-height: 1.72;
+        color: #50473f;
+        font-size: 0.97rem;
+      }
+
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-top: 1.1rem;
+        text-decoration: none;
+        border: 0;
+        border-radius: var(--radius-pill);
+        padding: 0.7rem 1.3rem;
+        background: var(--accent);
+        color: #fff;
+        font-size: 0.88rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .cta:hover,
+      .cta:focus-visible {
+        transform: translateY(-2px);
+        background: var(--accent-strong);
+        box-shadow: 0 8px 20px rgba(178, 141, 106, 0.3);
+      }
+
+      .cta:focus-visible {
+        outline: 2px solid var(--accent-strong);
+        outline-offset: 2px;
+      }
+
+      /* ── Footer ── */
+      footer {
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.88rem;
+        padding: 1.5rem 0 2.5rem;
+        letter-spacing: 0.04em;
+      }
+
+      footer .footer-date {
+        display: block;
+        font-size: 0.72rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+        color: var(--accent);
+      }
+
+      /* ── Scroll reveal ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition: opacity 0.9s ease, transform 0.9s ease;
+        will-change: opacity, transform;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Stagger delays for content cards */
+      .content .reveal:nth-child(2) {
+        transition-delay: 0.12s;
+      }
+
+      /* ── Focus states ── */
+      .hero-flip:focus-visible {
+        outline: 2px solid var(--accent-strong);
+        outline-offset: 4px;
+        border-radius: var(--radius-card);
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--accent-strong);
+        outline-offset: 2px;
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 640px) {
+        main {
+          padding: 0.85rem;
+        }
+
+        .hero {
+          min-height: 90vh;
+          padding: 1rem 0;
+        }
+
+        .flip-card {
+          min-height: 560px;
+        }
+
+        .content {
+          gap: 1rem;
+        }
+      }
+
+      @media (max-width: 380px) {
+        .flip-card {
+          min-height: 520px;
+        }
+
+        h1 {
+          font-size: 1.8rem;
+        }
+      }
+
+      /* ── Reduced motion ── */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+
+        .intro {
+          display: none;
+        }
+
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="app-shell grain">
+
+      <!-- Intro overlay -->
+      <div
+        class="intro"
+        :class="{ hidden: introHidden }"
+        role="status"
+        aria-live="polite"
+      >
+        <div class="intro-panel">
+          <span class="intro-line">Nothing Fancy &middot; Just Love</span>
+          <span class="intro-names">Abigail &amp; Brajan</span>
+          <span class="intro-date">05.06.2026</span>
+          <span class="intro-divider"></span>
+        </div>
+      </div>
+
+      <main>
+        <!-- Hero -->
+        <section class="hero" aria-labelledby="couple-heading">
+          <div
+            class="hero-flip reveal"
+            role="button"
+            tabindex="0"
+            :aria-label="isFlipped ? 'Kliknij, aby zobaczyc przod zaproszenia' : 'Kliknij, aby zobaczyc szczegoly wesela'"
+            @click="toggleFlip"
+            @keydown.enter.prevent="toggleFlip"
+            @keydown.space.prevent="toggleFlip"
+          >
+            <div class="flip-card" :class="{ 'is-flipped': isFlipped }">
+
+              <!-- Front -->
+              <article class="hero-card hero-card-front">
+                <div class="photo-frame">
+                  <img
+                    class="hero-photo"
+                    src="img/1.png"
+                    alt="Zdjecie pary mlodej - Abigail i Brajan"
+                    loading="eager"
+                    width="200"
+                    height="200"
+                  />
+                </div>
+                <p class="eyebrow">Nothing Fancy</p>
+                <p class="tagline">Just Love</p>
+                <h1 id="couple-heading">{{ coupleNames }}</h1>
+                <p class="date-display">{{ weddingDate }}</p>
+                <p v-if="guestName" class="guest-chip">
+                  Witamy, {{ guestName }}!
+                </p>
+                <span class="flip-hint">
+                  <span class="flip-hint-icon" aria-hidden="true"></span>
+                  Kliknij mnie
+                </span>
+              </article>
+
+              <!-- Back -->
+              <article class="hero-card hero-card-back">
+                <p class="back-eyebrow">Szczegoly</p>
+                <h2 class="back-title">Nasze Wesele</h2>
+                <p class="back-subtitle">Wszystkie informacje</p>
+                <span class="back-divider" aria-hidden="true"></span>
+                <div class="back-info-grid">
+                  <div class="back-info-item">
+                    <p class="back-label">Data</p>
+                    <p class="back-value">{{ weddingDate }}</p>
+                  </div>
+                  <div class="back-info-item">
+                    <p class="back-label">Miejsce</p>
+                    <p class="back-value">{{ weddingLocation }}</p>
+                  </div>
+                  <div class="back-info-item">
+                    <p class="back-label">JESTESCIE ZAPROSZENI:</p>
+                    <p class="back-value">{{ invitedGuestName }}</p>
+                  </div>
+                </div>
+                <span class="back-flip-hint">Kliknij, aby wrocic</span>
+              </article>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- Content cards -->
+        <section class="content" aria-label="Informacje">
+
+          <article class="info-box reveal">
+            <h2 class="info-title">Zaproszenie</h2>
+            <p class="info-body">
+              Z wielka radoscia zapraszamy Was do wspolnego swietowania
+              naszego slubu. Ten wyjatkowy dzien chcemy spedzic w gronie
+              najblizszych nam osob. Wiecej szczegolow juz wkrotce!
+            </p>
+          </article>
+
+          <article class="info-box reveal">
+            <h2 class="info-title">Dla Gosci</h2>
+            <p class="info-body">
+              Kazda zaproszona osoba otrzyma swoj unikalny, dedykowany link
+              z&nbsp;imieniem &mdash; np.&nbsp;<strong>?guest=Anna</strong>.
+              Dzieki temu zaproszenie bedzie spersonalizowane specjalnie
+              dla&nbsp;Ciebie.
+            </p>
+            <a class="cta" href="#couple-heading">
+              &uarr; Zobacz zaproszenie
+            </a>
+          </article>
+
+        </section>
+
+        <footer class="reveal">
+          <span class="footer-date">05.06.2026</span>
+          Dziekujemy, ze jestescie z nami.
+        </footer>
+      </main>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script>
+      const { createApp } = Vue;
+
+      createApp({
+        data() {
+          return {
+            coupleNames: "Abigail & Brajan",
+            weddingDate: "05.06.2026",
+            weddingLocation: "w Domu Weselnym, Dinslaken, Niemcy",
+            guestName: "",
+            introHidden: false,
+            isFlipped: false,
+            flipLocked: false,
+            guestAliases: {
+              Galaskiewicz: "GALASKIEWICZE"
+            }
+          };
+        },
+
+        computed: {
+          invitedGuestName() {
+            return this.guestName || "Max Musterman";
+          }
+        },
+
+        methods: {
+          toggleFlip() {
+            if (this.flipLocked) return;
+            this.flipLocked = true;
+            this.isFlipped = !this.isFlipped;
+            var self = this;
+            window.setTimeout(function () {
+              self.flipLocked = false;
+            }, 900);
+          },
+          findGuestByAlias(alias) {
+            if (!alias) return "";
+            var normalized = alias.trim().toLowerCase();
+            var keys = Object.keys(this.guestAliases);
+            for (var i = 0; i < keys.length; i += 1) {
+              var key = keys[i];
+              if (key.toLowerCase() === normalized) {
+                return this.guestAliases[key];
+              }
+            }
+            return "";
+          }
+        },
+
+        mounted() {
+          var params = new URLSearchParams(window.location.search);
+          var raw = params.get("guest");
+          var hashAlias = window.location.hash.replace(/^#/, "").trim();
+
+          if (raw) {
+            var safeQuery = raw.trim().replace(/[<>"'&]/g, "").slice(0, 60);
+            if (safeQuery.length > 0) {
+              this.guestName = safeQuery;
+            }
+          } else {
+            var guestFromAlias = this.findGuestByAlias(hashAlias);
+            if (guestFromAlias) {
+              this.guestName = guestFromAlias;
+            }
+          }
+
+          var reducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches;
+
+          if (reducedMotion) {
+            this.introHidden = true;
+            document.querySelectorAll(".reveal").forEach(function (el) {
+              el.classList.add("is-visible");
+            });
+            return;
+          }
+
+          var self = this;
+          window.setTimeout(function () {
+            self.introHidden = true;
+          }, 1700);
+
+          var observer = new IntersectionObserver(
+            function (entries, obs) {
+              entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+              });
+            },
+            { threshold: 0.14, rootMargin: "0px 0px -36px 0px" }
+          );
+
+          document.querySelectorAll(".reveal").forEach(function (el) {
+            observer.observe(el);
+          });
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>
