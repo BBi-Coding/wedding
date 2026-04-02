@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Abigail &amp; Brajan &ndash; Zaproszenie Slubne</title>
-    <meta name="description" content="Zaproszenie na slub Abigail i Brajana, 05.06.2026" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content="Zaproszenie na slub Abigail i Brajana, 12.06.2026" />
     <style>
       :root {
         --bg: #f7f4ef;
@@ -445,16 +446,13 @@
         font-size: 0.97rem;
       }
 
-      .support-note {
-        margin-top: 1rem;
-        line-height: 1.72;
-        color: #50473f;
-        font-size: 0.95rem;
+      .info-box .info-body + .info-body {
+        margin-top: 0.9rem;
       }
 
       .support-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 0.85rem;
         margin-top: 1rem;
       }
@@ -463,7 +461,7 @@
         background: rgba(255, 255, 255, 0.78);
         border: 1px solid rgba(178, 141, 106, 0.2);
         border-radius: 14px;
-        padding: 0.85rem;
+        padding: 1.1rem 1rem;
         text-align: center;
         display: grid;
         justify-items: center;
@@ -485,34 +483,39 @@
       }
 
       .support-logo {
-        width: 100px;
-        height: 50px;
+        width: 132px;
+        height: 66px;
         object-fit: contain;
         display: inline-block;
       }
 
       .support-value {
-        font-size: 0.95rem;
+        font-size: 1.22rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
         color: #3f352c;
         word-break: break-word;
         text-align: center;
       }
 
-      .bank-note {
-        margin-top: 0.5rem;
-        font-size: 0.86rem;
-        color: #6a5e52;
-        line-height: 1.55;
-        text-align: center;
+      .support-value a {
+        font-size: inherit;
       }
 
       .support-qr {
-        width: 120px;
-        height: 120px;
-        margin-top: 0.6rem;
-        border-radius: 10px;
+        width: 200px;
+        height: 200px;
+        margin-top: 0.85rem;
+        border-radius: 12px;
         border: 1px solid rgba(178, 141, 106, 0.22);
         background: #fff;
+      }
+
+      @media (max-width: 380px) {
+        .support-qr {
+          width: min(200px, 72vw);
+          height: min(200px, 72vw);
+        }
       }
 
       .cta {
@@ -726,7 +729,7 @@
         <div class="intro-panel">
           <span class="intro-line">{{ t('introLine') }}</span>
           <span class="intro-names">{{ t('introNames') }}</span>
-          <span class="intro-date">05.06.2026</span>
+          <span class="intro-date">12.06.2026</span>
           <span class="intro-divider"></span>
         </div>
       </div>
@@ -803,7 +806,8 @@
           <article class="info-box reveal">
             <h2 class="info-title">{{ t('sectionTitle') }}</h2>
             <p class="info-body">{{ t('sectionBody') }}</p>
-            <p class="support-note">{{ t('supportNote') }}</p>
+            <p class="info-body">{{ t('sectionGift') }}</p>
+            <p class="info-body">{{ t('sectionRsvp') }}</p>
             <div class="support-grid" aria-label="Opcje wsparcia">
               <div class="support-card">
                 <p class="support-title support-title-row">
@@ -812,8 +816,8 @@
                     src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg"
                     alt="Logo PayPal"
                     loading="lazy"
-                    width="100"
-                    height="100"
+                    width="132"
+                    height="66"
                   />
                 </p>
                 <p class="support-value">
@@ -826,21 +830,12 @@
                 </p>
                 <img
                   class="support-qr"
-                  src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fpaypal.me%2FBrajanBiegalski"
+                  src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https%3A%2F%2Fpaypal.me%2FBrajanBiegalski"
                   alt="Kod QR do PayPal BrajanBiegalski"
                   loading="lazy"
-                  width="120"
-                  height="120"
+                  width="200"
+                  height="200"
                 />
-              </div>
-              <div class="support-card">
-                <p class="support-title">{{ t('supportBank') }}</p>
-                <p class="support-value" aria-label="IBAN DE17 1001 2345 7219 3281 11">
-                  <span>DE17</span> <span>1001</span> <span>2345</span> <span>7219</span> <span>3281</span> <span>11</span>
-                </p>
-                <p class="support-value">Name: Brajan Biegalski</p>
-                <p class="support-value">BIC: TRBKDEBBXXX</p>
-                <p class="bank-note">{{ t('bankNote') }}</p>
               </div>
             </div>
             <a class="cta" href="#top" @click.prevent="scrollToTop">{{ t('ctaText') }}</a>
@@ -849,7 +844,7 @@
         </section>
 
         <footer class="reveal">
-          <span class="footer-date">05.06.2026</span>
+          <span class="footer-date">12.06.2026</span>
           {{ t('footerThanks') }}
         </footer>
       </main>
@@ -863,7 +858,7 @@
         data() {
           return {
             coupleNames: "Abigail & Brajan",
-            weddingDate: "05.06.2026",
+            weddingDate: "12.06.2026",
             weddingLocation: "w Domu Weselnym, Dinslaken, Niemcy",
             guestName: "",
             introHidden: false,
@@ -939,10 +934,12 @@
                 backLabelGuest: "JESTEŚCIE ZAPROSZENI:",
                 backFlipHint: "Kliknij, aby wrócić",
                 sectionTitle: "Dla Gości",
-                sectionBody: "Z wielką radością zapraszamy Was do wspólnego świętowania naszego ślubu. Ten wyjątkowy dzień chcemy spędzić w gronie najbliższych nam osób. Więcej szczegółów już wkrótce!",
-                supportNote: "Jeżeli chcielibyście wesprzeć nas finansowo, będziemy bardzo wdzięczni.",
-                supportBank: "Przelew bankowy",
-                bankNote: "\ud83c\udde9\ud83c\uddea Ta opcja działa tylko dla kont niemieckich.",
+                sectionBody:
+                  "Postanowiliśmy powiedzieć sobie \u201etak\u201d\u2026 i zrobić z tego dobr\u0105 imprez\u0119 \ud83d\ude04 Nie mo\u017ce Was tam zabrakn\u0105\u0107! Wi\u0119cej szczeg\u00f3\u0142\u00f3w ju\u017c wkr\u00f3tce.",
+                sectionGift:
+                  "Je\u015bli macie ochot\u0119 zrobi\u0107 nam prezent, b\u0119dziemy bardzo wdzi\u0119czni za Wasze wsparcie przy przygotowaniach weselnych \ud83d\ude0a Dla ch\u0119tnych \u2013 przelew lub PayPal zawsze si\u0119 sprawdz\u0105.",
+                sectionRsvp:
+                  "Dajcie nam prosz\u0119 do 19.04.2026 zna\u0107, czy b\u0119dziemy si\u0119 razem bawi\u0107.",
                 ctaText: "\u2191 Zobacz zaproszenie",
                 footerThanks: "Dziękujemy, że jesteście z nami!"
               },
@@ -963,10 +960,12 @@
                 backLabelGuest: "YOU ARE INVITED:",
                 backFlipHint: "Click to go back",
                 sectionTitle: "For Our Guests",
-                sectionBody: "With great joy we invite you to celebrate our wedding day with us. We want to spend this special day surrounded by those closest to our hearts. More details coming soon!",
-                supportNote: "If you would like to support us financially, we would be very grateful.",
-                supportBank: "Bank transfer",
-                bankNote: "\ud83c\udde9\ud83c\uddea This option is available for German bank accounts only.",
+                sectionBody:
+                  "We said \u201cyes\u201d to each other \u2026 and we\u2019re going to turn it into a great party \ud83d\ude04 We can\u2019t imagine celebrating without you! More details coming soon.",
+                sectionGift:
+                  "If you\u2019d like to give us a gift, we\u2019d be so grateful for your support as we plan the wedding \ud83d\ude0a For those who wish to \u2014 a bank transfer or PayPal always works.",
+                sectionRsvp:
+                  "Please let us know by 19 April 2026 if you\u2019ll be celebrating with us.",
                 ctaText: "\u2191 See invitation",
                 footerThanks: "Thank you for celebrating this day with us!"
               },
@@ -987,10 +986,12 @@
                 backLabelGuest: "IHR SEID EINGELADEN:",
                 backFlipHint: "Klicken, um zurückzukehren",
                 sectionTitle: "Für unsere Gäste",
-                sectionBody: "Mit großer Freude laden wir euch ein, unseren Hochzeitstag gemeinsam mit uns zu feiern. Wir möchten diesen besonderen Tag im Kreise unserer Liebsten verbringen. Weitere Details folgen bald!",
-                supportNote: "Wenn ihr uns finanziell ein wenig unterstützen möchtet, wären wir sehr dankbar.",
-                supportBank: "Banküberweisung",
-                bankNote: "\ud83c\udde9\ud83c\uddea Diese Option gilt nur für deutsche Bankkonten.",
+                sectionBody:
+                  "Wir haben uns das Ja-Wort gegeben \u2026 und wollen daraus eine richtig sch\u00f6ne Feier machen \ud83d\ude04 Ohne euch w\u00e4re sie nicht dasselbe! Weitere Details folgen bald.",
+                sectionGift:
+                  "Wenn ihr uns beschenken m\u00f6chtet, freuen wir uns sehr \u00fcber eure Unterst\u00fctzung bei den Hochzeitsvorbereitungen \ud83d\ude0a Wer mag \u2014 \u00dcberweisung oder PayPal sind immer willkommen.",
+                sectionRsvp:
+                  "Bitte gebt uns bis zum 19.04.2026 Bescheid, ob ihr mitfeiert.",
                 ctaText: "\u2191 Zur Einladung",
                 footerThanks: "Vielen Dank, dass ihr Teil unseres Weges seid!"
               }
