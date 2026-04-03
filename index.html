@@ -398,6 +398,10 @@
         margin-top: 0.3rem;
       }
 
+      .back-value--multiline {
+        white-space: pre-line;
+      }
+
       .back-flip-hint {
         margin-top: 1.4rem;
         font-size: 0.76rem;
@@ -786,7 +790,7 @@
                   </div>
                   <div class="back-info-item">
                     <p class="back-label">{{ t('backLabelPlace') }}</p>
-                    <p class="back-value">{{ weddingLocation }}</p>
+                    <p class="back-value back-value--multiline">{{ t('weddingLocation') }}</p>
                   </div>
                   <div class="back-info-item">
                     <p class="back-label">{{ t('backLabelGuest') }}</p>
@@ -859,7 +863,6 @@
           return {
             coupleNames: "Abigail & Brajan",
             weddingDate: "12.06.2026",
-            weddingLocation: "w Domu Weselnym, Dinslaken, Niemcy",
             guestName: "",
             introHidden: false,
             isFlipped: false,
@@ -867,24 +870,26 @@
             currentLang: "pl",
             guestAliases: {
               "sylwia-biegalska": "Sylwia Biegalska",
-              "rodzina-gad": "Gad",
+              "rodzina-gad": "Rachel, Nehemiasz, Eunika i S\u0142awek Gad",
               "dawid-magie-mazurek": "Mazurek",
               "henryk-mazurek": "Henryk Mazurek",
               "wanda-gad": "Wanda Gad",
               "milan-buchta": "Milan Buchta",
-              "denis-iwona": "Denis i Iwona",
-              "izabela-kornel": "Izabela i Kornel",
-              "aneta-york-milan": "Aneta i York",
-              "artur-malgorzata-kosla": "Kosla",
-              "natan-ola-seweryniak": "Seweryniak",
-              "marek-chrobak": "Chrobak",
+              "denis-iwona": "Denis Wienchol i Iwona",
+              "izabela-kornel": "Izabella Gad i Kornel Sklarczyk",
+              "aneta-york-milan":
+                "Aneta, York, J\u00f6rg i Milan Kr\u00f6ger",
+              "margarita-kosla": "Margareta i Artur Ko\u015bla",
+              "natan-ola-seweryniak": "Natan i Ola Seweryniak",
+              "marek-chrobak": "Marek i Dilana Chrobak",
               "jarek-ania": "Jarek i Ania",
-              "hania-odzimkowska": "Hania Odzimkowska",
-              "magda-lutaj-dawid": "Lutaj",
+              "hanna-odzimowska": "Hanna Odzimowska",
+              "magdalena-lutaj": "Magdalena \u0141utaj",
+              "dawid-lutaj": "Dawid \u0141utaj",
               "ryszard-banaczek": "Ryszard Banaczek",
               "sebastian-walczak": "Sebastian Walczak",
               "elizabeth-andrzejczak": "Elizabeth Andrzejczak",
-              "mariusz-wrobel": "Mariusz Wrobel",
+              "mariusz-wrobel": "Mariusz Wr\u00f3bel",
               "milan-iwona-durdewicz": "Durdewicz",
               "piotr-polyanna-konieczny": "Konieczny",
               "david-christine-pluschke": "Pluschke",
@@ -893,28 +898,49 @@
               "szymon": "Szymon",
               "noa": "Noa",
               "kevin": "Kevin",
-              "kuba-dortmund": "Kuba",
+              "kuba": "Kuba",
               "david-kolmann": "David Kolmann",
               "mike-helen-bossart": "Bossart",
               "ines": "Ines",
               "pietrasy": "Pietrasy",
-              "denis-oberhausen": "Denis",
-              "galaskiewicze": "Galaskiewicze",
+              "denis": "Denis",
+              "galaskiewicz":
+                "Dawid, Lena, Estera i Zbyszek Ga\u0142askiewicz",
               "wiki-nelly": "Wiki i Nelly",
               "emanuel": "Emanuel",
-              "natan-dawid": "Natan i Dawid",
-              "brian-dubis-rodzina": "Dubis",
+              "korolyk-markiewicz": "Korolyk Markiewicz",
+              "gorzkiewicz": "Natan i Dawid Gorzkiewicz",
+              "brian-dubis-rodzina":
+                "Bryan, Julia, Sylwia i Darek Dubis",
               "kuba-fleszar": "Kuba Fleszar",
-              "jajko": "Jajko",
-              "dawid-zenia": "Dawid i Zenia",
+              "daniel-jajko": "Daniel Jajko",
+              "dawid-zenia": "Dawid i Zenia Wo\u0142owiec",
               "andrzej-grazenia-dros": "Dros",
               "anzhelika": "Anzhelika",
-              "ania-matrin-wolny": "Wolny",
-              "damian-oliwia-itsyn": "Itsyn",
-              "dygacz": "Dygacz",
-              "koziol": "Koziol",
-              "enia-stuttgart": "Enia",
+              "ania-matrin-wolny": "Anna Wolny",
+              "oliwia-damian-lagiera": "Oliwia i Damian Lagiera",
+              "dygacz": "Ruben Dygacz",
+              "koziol": "Filip Kozio\u0142",
+              "eunika-sobkowiak": "Eunika Sobkowiak",
               "kuzyn-zona": "Kuzyn"
+            },
+            guestAliasRedirects: {
+              "artur-malgorzata-kosla": "margarita-kosla",
+              "kuba-dortmund": "kuba",
+              "denis-oberhausen": "denis",
+              "galaskiewicze": "galaskiewicz",
+              "natan-dawid": "gorzkiewicz",
+              "bryan-julia-sylwia-darek-dubis": "brian-dubis-rodzina",
+              "jajko": "daniel-jajko",
+              "magda-lutaj-dawid": "magdalena-lutaj",
+              "hania-odzimkowska": "hanna-odzimowska",
+              "enia-stuttgart": "eunika-sobkowiak",
+              "damian-oliwia-itsyn": "oliwia-damian-lagiera",
+              "damian-itsyn": "oliwia-damian-lagiera",
+              "oliwia-itsyn": "oliwia-damian-lagiera",
+              "lukasz-itsyn": "oliwia-damian-lagiera",
+              "itsyn": "oliwia-damian-lagiera",
+              "andrzej-grazenia-lukasz-dros": "andrzej-grazenia-dros"
             },
             translations: {
               pl: {
@@ -931,15 +957,17 @@
                 backSubtitle: "Wszystkie informacje",
                 backLabelDate: "Data",
                 backLabelPlace: "Miejsce",
+                weddingLocation:
+                  "Kurt-Schumacher-Stra\u00dfe 210\n46539 Dinslaken Niemcy",
                 backLabelGuest: "JESTEŚCIE ZAPROSZENI:",
                 backFlipHint: "Kliknij, aby wrócić",
                 sectionTitle: "Dla Gości",
                 sectionBody:
                   "Postanowiliśmy powiedzieć sobie \u201etak\u201d\u2026 i zrobić z tego dobr\u0105 imprez\u0119. Nie mo\u017ce Was tam zabrakn\u0105\u0107! Wi\u0119cej szczeg\u00f3\u0142\u00f3w ju\u017c wkr\u00f3tce.",
                 sectionGift:
-                  "Je\u015bli macie ochot\u0119 zrobi\u0107 nam prezent, b\u0119dziemy bardzo wdzi\u0119czni za Wasze wsparcie przy przygotowaniach weselnych. Dla ch\u0119tnych \u2013 przelew lub PayPal zawsze si\u0119 sprawdz\u0105.",
+                  "Je\u015bli macie ochot\u0119 zrobi\u0107 nam prezent, b\u0119dziemy bardzo wdzi\u0119czni za Wasze wsparcie przy przygotowaniach weselnych. Dla ch\u0119tnych \u2013 PayPal zawsze si\u0119 sprawdzi.",
                 sectionRsvp:
-                  "Dajcie nam prosz\u0119 do 19.04.2026 zna\u0107, czy b\u0119dziemy si\u0119 razem bawi\u0107.",
+                  "Prosimy, dajcie nam zna\u0107 do 19.04.2026, czy b\u0119dziemy si\u0119 razem bawi\u0107.",
                 ctaText: "\u2191 Zobacz zaproszenie",
                 footerThanks: "Dziękujemy, że jesteście z nami!"
               },
@@ -957,13 +985,15 @@
                 backSubtitle: "All details in one place",
                 backLabelDate: "Date",
                 backLabelPlace: "Venue",
+                weddingLocation:
+                  "Kurt-Schumacher-Stra\u00dfe 210\n46539 Dinslaken Germany",
                 backLabelGuest: "YOU ARE INVITED:",
                 backFlipHint: "Click to go back",
                 sectionTitle: "For Our Guests",
                 sectionBody:
                   "We said \u201cyes\u201d to each other \u2026 and we\u2019re going to turn it into a great party. We can\u2019t imagine celebrating without you! More details coming soon.",
                 sectionGift:
-                  "If you\u2019d like to give us a gift, we\u2019d be so grateful for your support as we plan the wedding. For those who wish to \u2014 a bank transfer or PayPal always works.",
+                  "If you\u2019d like to give us a gift, we\u2019d be so grateful for your support as we plan the wedding. For those who wish to \u2014 PayPal is always welcome.",
                 sectionRsvp:
                   "Please let us know by 19 April 2026 if you\u2019ll be celebrating with us.",
                 ctaText: "\u2191 See invitation",
@@ -983,13 +1013,15 @@
                 backSubtitle: "Alle Informationen",
                 backLabelDate: "Datum",
                 backLabelPlace: "Ort",
+                weddingLocation:
+                  "Kurt-Schumacher-Stra\u00dfe 210\n46539 Dinslaken Deutschland",
                 backLabelGuest: "IHR SEID EINGELADEN:",
                 backFlipHint: "Klicken, um zurückzukehren",
                 sectionTitle: "Für unsere Gäste",
                 sectionBody:
                   "Wir haben uns das Ja-Wort gegeben \u2026 und wollen daraus eine richtig sch\u00f6ne Feier machen. Ohne euch w\u00e4re sie nicht dasselbe! Weitere Details folgen bald.",
                 sectionGift:
-                  "Wenn ihr uns beschenken m\u00f6chtet, freuen wir uns sehr \u00fcber eure Unterst\u00fctzung bei den Hochzeitsvorbereitungen. Wer mag \u2014 \u00dcberweisung oder PayPal sind immer willkommen.",
+                  "Wenn ihr uns beschenken m\u00f6chtet, freuen wir uns sehr \u00fcber eure Unterst\u00fctzung bei den Hochzeitsvorbereitungen. Wer mag \u2014 PayPal ist immer willkommen.",
                 sectionRsvp:
                   "Bitte gebt uns bis zum 19.04.2026 Bescheid, ob ihr mitfeiert.",
                 ctaText: "\u2191 Zur Einladung",
@@ -1026,6 +1058,10 @@
           findGuestByAlias(alias) {
             if (!alias) return "";
             var normalized = alias.trim().toLowerCase();
+            var redirects = this.guestAliasRedirects;
+            if (redirects[normalized]) {
+              normalized = redirects[normalized];
+            }
             var keys = Object.keys(this.guestAliases);
             for (var i = 0; i < keys.length; i += 1) {
               var key = keys[i];
