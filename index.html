@@ -157,9 +157,81 @@
       /* ── Hero section ── */
       .hero {
         min-height: 100vh;
-        display: grid;
-        place-items: center;
-        padding: 2rem 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0 0.5rem;
+        position: relative;
+      }
+
+      .hero-inner {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 0;
+      }
+
+      .hero-scroll-hint {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.5rem;
+        margin-bottom: clamp(0.75rem, 3vh, 1.35rem);
+        padding: 0.65rem 1.25rem;
+        border: 0;
+        background: none;
+        cursor: pointer;
+        color: #5c4634;
+        opacity: 0.95;
+        text-decoration: none;
+        transition: opacity 0.25s ease, color 0.25s ease, transform 0.25s ease;
+        animation: heroScrollNudge 2.4s ease-in-out infinite;
+      }
+
+      .hero-scroll-hint:hover,
+      .hero-scroll-hint:focus-visible {
+        opacity: 1;
+        color: var(--accent-strong);
+      }
+
+      .hero-scroll-hint:focus-visible {
+        outline: 2px solid var(--ring);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      .hero-scroll-hint svg {
+        width: clamp(3.75rem, 12vw, 5.85rem);
+        height: clamp(3.75rem, 12vw, 5.85rem);
+        display: block;
+      }
+
+      .hero-scroll-hint path {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      @keyframes heroScrollNudge {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(10px);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero-scroll-hint {
+          animation: none;
+          opacity: 0.95;
+        }
       }
 
       .hero-flip {
@@ -741,6 +813,7 @@
       <main>
         <!-- Hero -->
         <section class="hero" aria-labelledby="couple-heading">
+          <div class="hero-inner">
           <div
             class="hero-flip reveal"
             role="button"
@@ -802,10 +875,20 @@
 
             </div>
           </div>
+          </div>
+          <a
+            class="hero-scroll-hint"
+            href="#more-info"
+            :aria-label="t('scrollDownAria')"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 3.15 L12 10.9 M7.65 10.9 L12 18.35 L16.35 10.9" />
+            </svg>
+          </a>
         </section>
 
         <!-- Content cards -->
-        <section class="content" aria-label="Informacje">
+        <section id="more-info" class="content" aria-label="Informacje">
 
           <article class="info-box reveal">
             <h2 class="info-title">{{ t('sectionTitle') }}</h2>
@@ -923,7 +1006,17 @@
               "dygacz": "Ruben Dygacz",
               "jared-nicole-dygacz": "Jared & Nicole Dygacz",
               "koziol": "Filip Kozio\u0142",
-              "eunika-sobkowiak": "Eunika Sobkowiak"
+              "eunika-sobkowiak": "Eunika Sobkowiak",
+              "marek-jowita-jajko": "Marek & Jowita Jajko",
+              "kris-dawni": "Kris & Dawni",
+              "john-wendy-margiotta": "John & Wendy Margiotta",
+              "nicole-taubert": "Nicole Taubert",
+              "michelle-vivien-marwin-mizera":
+                "Michelle & Vivien & Marwin Mizera",
+              "holger-beata-morcour": "Holger & Beata Morcour",
+              "filip-grunberg": "Filip Grunberg",
+              "dominik-sylwia-alan-kumiega":
+                "Dominik & Sylwia & Alan Kumiega"
             },
             guestAliasRedirects: {
               "emanuel": "korolyk-markiewicz",
@@ -972,7 +1065,8 @@
                 sectionRsvp:
                   "Prosimy, dajcie nam zna\u0107 do 19.04.2026, czy b\u0119dziemy si\u0119 razem bawi\u0107.",
                 ctaText: "\u2191 Zobacz zaproszenie",
-                footerThanks: "Dziękujemy, że jesteście z nami!"
+                footerThanks: "Dziękujemy, że jesteście z nami!",
+                scrollDownAria: "Przewiń w dół do informacji dla gości"
               },
               en: {
                 introLine: "Nothing Fancy \u00b7 Just Love",
@@ -1000,7 +1094,8 @@
                 sectionRsvp:
                   "Please let us know by 19 April 2026 if you\u2019ll be celebrating with us.",
                 ctaText: "\u2191 See invitation",
-                footerThanks: "Thank you for celebrating this day with us!"
+                footerThanks: "Thank you for celebrating this day with us!",
+                scrollDownAria: "Scroll down for guest information"
               },
               de: {
                 introLine: "Nothing Fancy \u00b7 Just Love",
@@ -1028,7 +1123,8 @@
                 sectionRsvp:
                   "Bitte gebt uns bis zum 19.04.2026 Bescheid, ob ihr mitfeiert.",
                 ctaText: "\u2191 Zur Einladung",
-                footerThanks: "Vielen Dank, dass ihr Teil unseres Weges seid!"
+                footerThanks: "Vielen Dank, dass ihr Teil unseres Weges seid!",
+                scrollDownAria: "Nach unten zu den Gästeinformationen scrollen"
               }
             }
           };
