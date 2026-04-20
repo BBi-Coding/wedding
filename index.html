@@ -894,7 +894,7 @@
             <h2 class="info-title">{{ t('sectionTitle') }}</h2>
             <p class="info-body">{{ t('sectionBody') }}</p>
             <p class="info-body">{{ t('sectionGift') }}</p>
-            <p class="info-body">{{ t('sectionRsvp') }}</p>
+            <p v-if="t('sectionRsvp')" class="info-body">{{ t('sectionRsvp') }}</p>
             <div class="support-grid" aria-label="Opcje wsparcia">
               <div class="support-card">
                 <p class="support-title support-title-row">
@@ -1082,8 +1082,7 @@
                   "Postanowiliśmy powiedzieć sobie \u201etak\u201d\u2026 i zrobić z tego dobr\u0105 imprez\u0119. Nie mo\u017ce Was tam zabrakn\u0105\u0107! Wi\u0119cej szczeg\u00f3\u0142\u00f3w ju\u017c wkr\u00f3tce.",
                 sectionGift:
                   "Je\u015bli macie ochot\u0119 zrobi\u0107 nam prezent, b\u0119dziemy bardzo wdzi\u0119czni za Wasze wsparcie przy przygotowaniach weselnych. Dla ch\u0119tnych \u2013 PayPal zawsze si\u0119 sprawdzi.",
-                sectionRsvp:
-                  "Prosimy, dajcie nam zna\u0107 do 19.04.2026, czy b\u0119dziemy si\u0119 razem bawi\u0107.",
+                sectionRsvp: "",
                 ctaText: "\u2191 Zobacz zaproszenie",
                 footerThanks: "Dziękujemy, że jesteście z nami!",
                 scrollDownAria: "Przewiń w dół do informacji dla gości"
@@ -1111,8 +1110,7 @@
                   "We said \u201cyes\u201d to each other \u2026 and we\u2019re going to turn it into a great party. We can\u2019t imagine celebrating without you! More details coming soon.",
                 sectionGift:
                   "If you\u2019d like to give us a gift, we\u2019d be so grateful for your support as we plan the wedding. For those who wish to \u2014 PayPal is always welcome.",
-                sectionRsvp:
-                  "Please let us know by 19 April 2026 if you\u2019ll be celebrating with us.",
+                sectionRsvp: "",
                 ctaText: "\u2191 See invitation",
                 footerThanks: "Thank you for celebrating this day with us!",
                 scrollDownAria: "Scroll down for guest information"
@@ -1140,8 +1138,7 @@
                   "Wir haben uns das Ja-Wort gegeben \u2026 und wollen daraus eine richtig sch\u00f6ne Feier machen. Ohne euch w\u00e4re sie nicht dasselbe! Weitere Details folgen bald.",
                 sectionGift:
                   "Wenn ihr uns beschenken m\u00f6chtet, freuen wir uns sehr \u00fcber eure Unterst\u00fctzung bei den Hochzeitsvorbereitungen. Wer mag \u2014 PayPal ist immer willkommen.",
-                sectionRsvp:
-                  "Bitte gebt uns bis zum 19.04.2026 Bescheid, ob ihr mitfeiert.",
+                sectionRsvp: "",
                 ctaText: "\u2191 Zur Einladung",
                 footerThanks: "Vielen Dank, dass ihr Teil unseres Weges seid!",
                 scrollDownAria: "Nach unten zu den Gästeinformationen scrollen"
