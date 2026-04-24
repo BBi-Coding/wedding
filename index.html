@@ -1210,6 +1210,11 @@
             .replace(/^#/, "")
             .replace(/^\/+|\/+$/g, "")
             .trim();
+          var pathAlias = decodeURIComponent(window.location.pathname)
+            .replace(/^\/+|\/+$/g, "")
+            .replace(/^index\.html$/i, "")
+            .trim();
+          var guestAlias = hashAlias || pathAlias;
 
           if (raw) {
             var safeQuery = raw.trim().replace(/[<>"'&]/g, "").slice(0, 60);
@@ -1217,7 +1222,7 @@
               this.guestName = safeQuery;
             }
           } else {
-            var guestFromAlias = this.findGuestByAlias(hashAlias);
+            var guestFromAlias = this.findGuestByAlias(guestAlias);
             if (guestFromAlias) {
               this.guestName = guestFromAlias;
             }
