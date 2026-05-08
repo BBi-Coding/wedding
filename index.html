@@ -700,6 +700,10 @@
       }
 
       /* Stagger delays for content cards */
+      .content .reveal:nth-child(1) {
+        transition-delay: 0s;
+      }
+
       .content .reveal:nth-child(2) {
         transition-delay: 0.12s;
       }
@@ -881,14 +885,36 @@
             href="#more-info"
             :aria-label="t('scrollDownAria')"
           >
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M12 3.15 L12 10.9 M7.65 10.9 L12 18.35 L16.35 10.9" />
+            <svg viewBox="0 0 60 60" aria-hidden="true" focusable="false">
+              <!-- outer ring -->
+              <circle cx="30" cy="30" r="27" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.35"/>
+              <!-- inner ring -->
+              <circle cx="30" cy="30" r="21" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+              <!-- upper chevron -->
+              <path d="M21 25 L30 33 L39 25" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+              <!-- lower chevron -->
+              <path d="M21 32 L30 40 L39 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
         </section>
 
         <!-- Content cards -->
         <section id="more-info" class="content" aria-label="Informacje">
+
+          <article class="info-box reveal">
+            <h2 class="info-title">{{ t('ceremonySectionTitle') }}</h2>
+            <p class="info-body">{{ t('ceremonySectionBody') }}</p>
+            <div style="display:flex; gap:0.75rem; margin-top:1rem; align-items:stretch;">
+              <div class="back-info-item" style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+                <p class="back-label">{{ t('ceremonyLabelTime') }}</p>
+                <p style="font-size:3.4rem; font-weight:100; letter-spacing:0.08em; color:#43392f; line-height:1; margin-top:0.35rem; font-variant-numeric:tabular-nums; font-family:'Segoe UI', 'Helvetica Neue', Arial, sans-serif;">15:00</p>
+              </div>
+              <div class="back-info-item" style="flex:1;">
+                <p class="back-label">{{ t('ceremonyLabelPlace') }}</p>
+                <p class="back-value back-value--multiline">{{ t('ceremonyLocation') }}</p>
+              </div>
+            </div>
+          </article>
 
           <article class="info-box reveal">
             <h2 class="info-title">{{ t('sectionTitle') }}</h2>
@@ -1083,6 +1109,11 @@
                   "Talstra\u00dfe 33\n45964 Gladbeck Niemcy",
                 backLabelGuest: "JESTE\u015aCIE ZAPROSZENI:",
                 backFlipHint: "Kliknij, aby wr\u00f3ci\u0107",
+                ceremonySectionTitle: "Przemówienie Ślubne",
+                ceremonySectionBody: "O 15:00 zapraszamy na przemówienie ślubne w sali. Cieszymy się, że będziecie z nami w tej wyjątkowej chwili.",
+                ceremonyLabelTime: "Godzina",
+                ceremonyLabelPlace: "Miejsce",
+                ceremonyLocation: "Johannastra\u00dfe 19\nBrauck\n45968 Gladbeck\nNiemcy",
                 sectionTitle: "Dla Go\u015bci",
                 sectionBody:
                   "Postanowili\u015bmy powiedzie\u0107 sobie \u201etek\u201d\u2026 i zrobi\u0107 z tego dobr\u0105 imprez\u0119. Nie mo\u017ce Was tam zabrakn\u0105\u0107! Wi\u0119cej szczeg\u00f3\u0142\u00f3w ju\u017c wkr\u00f3tce.",
@@ -1111,6 +1142,11 @@
                   "Talstra\u00dfe 33\n45964 Gladbeck Germany",
                 backLabelGuest: "YOU ARE INVITED:",
                 backFlipHint: "Click to go back",
+                ceremonySectionTitle: "Wedding Address",
+                ceremonySectionBody: "At 15:00 we invite you to the wedding address in the hall. We are so glad you will be with us for this special moment.",
+                ceremonyLabelTime: "Time",
+                ceremonyLabelPlace: "Venue",
+                ceremonyLocation: "Johannastra\u00dfe 19\nBrauck\n45968 Gladbeck\nGermany",
                 sectionTitle: "For Our Guests",
                 sectionBody:
                   "We said \u201cyes\u201d to each other \u2026 and we\u2019re going to turn it into a great party. We can\u2019t imagine celebrating without you! More details coming soon.",
@@ -1139,6 +1175,11 @@
                   "Talstra\u00dfe 33\n45964 Gladbeck Deutschland",
                 backLabelGuest: "IHR SEID EINGELADEN:",
                 backFlipHint: "Klicken, um zur\u00fcckzukehren",
+                ceremonySectionTitle: "Hochzeitsansprache",
+                ceremonySectionBody: "Um 15:00 Uhr laden wir euch herzlich zur Hochzeitsansprache im Saal ein. Wir freuen uns sehr, dass ihr diesen besonderen Moment mit uns teilt.",
+                ceremonyLabelTime: "Uhrzeit",
+                ceremonyLabelPlace: "Ort",
+                ceremonyLocation: "Johannastra\u00dfe 19\nBrauck\n45968 Gladbeck\nDeutschland",
                 sectionTitle: "F\u00fcr unsere G\u00e4ste",
                 sectionBody:
                   "Wir haben uns das Ja-Wort gegeben \u2026 und wollen daraus eine richtig sch\u00f6ne Feier machen. Ohne euch w\u00e4re sie nicht dasselbe! Weitere Details folgen bald.",
